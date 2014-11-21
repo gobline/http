@@ -79,7 +79,7 @@ $request = new Mendo\Http\Request\HttpRequest();
 
 $languages = ['fr', 'nl', 'en']; // possible languages
 $defaultLanguage = 'en';
-(new Mendo\Http\Request\Resolver\LanguageSubdomainResolver($languages, $defaultLanguage))->resolve($request);
+(new Mendo\Http\Request\Resolver\LanguageSubdirectoryResolver($languages, $defaultLanguage))->resolve($request);
 
 $request->getBaseUrl(); // returns "/myProject"
 
