@@ -2,7 +2,7 @@
 
 ## HTTP Request
 
-```Mendo\Http\Request``` 
+The ```Mendo\Http\Request``` class
 
 * encapsulates the request information and provides a **fluent API** for easy access.
 * allows you to automatically **find the language and base URL** using *resolvers*.
