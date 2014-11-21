@@ -75,11 +75,11 @@ The Language and Base URL Resolvers allow you to find the language and base URL 
 
 $request = new Mendo\Http\Request\HttpRequest();
 
-(new BaseUrlAutoResolver())->resolve($request);
+(new Mendo\Http\Request\Resolver\BaseUrlAutoResolver())->resolve($request);
 
 $languages = ['fr', 'nl', 'en']; // possible languages
 $defaultLanguage = 'en';
-(new LanguageSubdomainResolver($languages, $defaultLanguage))->resolve($request);
+(new Mendo\Http\Request\Resolver\LanguageSubdomainResolver($languages, $defaultLanguage))->resolve($request);
 
 $request->getBaseUrl(); // returns "/myProject"
 
