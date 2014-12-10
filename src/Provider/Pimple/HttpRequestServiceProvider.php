@@ -59,7 +59,7 @@ class HttpRequestServiceProvider implements ServiceProviderInterface
                 $languageResolver->resolve($request);
             }
 
-            return $urlParser->parse();
+            return $request;
         };
     }
 }
