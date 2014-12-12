@@ -184,6 +184,8 @@ interface HttpRequestInterface
     /**
      * @param string $name
      *
+     * @throws \InvalidArgumentException
+     *
      * @return bool
      */
     public function hasQuery($name);
@@ -206,6 +208,8 @@ interface HttpRequestInterface
 
     /**
      * @param string $name
+     *
+     * @throws \InvalidArgumentException
      *
      * @return bool
      */

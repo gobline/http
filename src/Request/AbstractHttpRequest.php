@@ -280,6 +280,10 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      */
     public function hasQuery($name)
     {
+        if ((string) $name === '') {
+            throw new \InvalidArgumentException('$name cannot be empty');
+        }
+
         return array_key_exists($name, $this->queryData);
     }
 
@@ -311,6 +315,10 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      */
     public function hasPost($name)
     {
+        if ((string) $name === '') {
+            throw new \InvalidArgumentException('$name cannot be empty');
+        }
+
         return array_key_exists($name, $_POST);
     }
 
