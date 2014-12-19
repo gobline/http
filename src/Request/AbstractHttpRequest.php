@@ -294,7 +294,9 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
     {
         switch (count($args)) {
             default:
-                throw new \InvalidArgumentException('getQuery() takes one or two arguments');
+                throw new \InvalidArgumentException('getQuery() takes two arguments maximum');
+            case 0:
+                return $this->queryData;
             case 1:
                 if (!$this->hasQuery($args[0])) {
                     throw new \InvalidArgumentException('Query string parameter "'.$args[0].'" not found');
@@ -329,7 +331,9 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
     {
         switch (count($args)) {
             default:
-                throw new \InvalidArgumentException('getPost() takes one or two arguments');
+                throw new \InvalidArgumentException('getPost() takes two arguments maximum');
+            case 0:
+                return $this->postData;
             case 1:
                 if (!$this->hasPost($args[0])) {
                     throw new \InvalidArgumentException('Post parameter "'.$args[0].'" not found');
