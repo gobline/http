@@ -140,25 +140,9 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getQueryData()
-    {
-        return $this->queryData;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setPostData(array $data)
     {
         $this->postData = $data;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPostData()
-    {
-        return $this->postData;
     }
 
     /**

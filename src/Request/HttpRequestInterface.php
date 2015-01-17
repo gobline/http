@@ -86,19 +86,9 @@ interface HttpRequestInterface
     public function setQueryData(array $data);
 
     /**
-     * @return array
-     */
-    public function getQueryData();
-
-    /**
      * @param array $data
      */
     public function setPostData(array $data);
-
-    /**
-     * @return array
-     */
-    public function getPostData();
 
     /**
      * @param string $baseUrl
@@ -191,9 +181,10 @@ interface HttpRequestInterface
     public function hasQuery($name);
 
     /**
-     * This method takes one or two arguments.
+     * This method takes zero, one or two arguments.
+     * If no arguments have been passed, the whole get request data array is returned.
      * The first argument is the query string variable you want to get.
-     * The second optional argument is the default value you want to get back
+     * The second argument is the default value you want to get back
      * in case the query string hasn't been found.
      * If the second argument is omitted and the variable
      * hasn't been found, an exception will be thrown.
@@ -216,9 +207,10 @@ interface HttpRequestInterface
     public function hasPost($name);
 
     /**
-     * This method takes one or two arguments.
+     * This method takes zero, one or two arguments.
+     * If no arguments have been passed, the whole post request data array is returned.
      * The first argument is the post variable you want to get.
-     * The second optional argument is the default value you want to get back
+     * The second argument is the default value you want to get back
      * in case the post variable hasn't been found.
      * If the second argument is omitted and the variable
      * hasn't been found, an exception will be thrown.
