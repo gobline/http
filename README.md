@@ -24,14 +24,8 @@ public function getPort();
 public function setPath($path);
 public function getPath();
 
-public function setQueryData(array $data);
-public function getQueryData();
-
 public function hasQuery($name);
 public function getQuery(...$args);
-
-public function setPostData(array $data);
-public function getPostData();
 
 public function hasPost($name);
 public function getPost(...$args);
