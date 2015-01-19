@@ -150,12 +150,7 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      */
     public function setBaseUrl($baseUrl)
     {
-        $baseUrl = (string) $baseUrl;
-        if ($baseUrl === '') {
-            throw new \InvalidArgumentException('$baseUrl cannot be empty');
-        }
-
-        $this->baseUrl = $baseUrl;
+        $this->baseUrl = (string) $baseUrl;
     }
 
     /**
