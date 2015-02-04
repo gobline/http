@@ -50,8 +50,7 @@ class LanguageSubdirectoryResolver implements ResolverInterface
 
         if (in_array($language, $this->languages)) {
             $httpRequest->setLanguage($language);
-            $path = str_replace('/'.$language, '', $path);
-            $httpRequest->setPath($path);
+            $httpRequest->setPath('/'.implode('/', $pathExploded));
         } else {
             $httpRequest->setLanguage($this->defaultLanguage);
         }

@@ -54,6 +54,16 @@ class HttpRequestTest extends PHPUnit_Framework_TestCase
         $request->setPort(8080);
         $this->assertSame('http://example.com:8080/fr/hello/world', $request->getUrl(true));
         $this->assertSame('/fr/hello/world', $request->getUrl(false));
+
+        $url = 'http://example.com/fr/pomme/framboise';
+
+        $request = new StringHttpRequest($url);
+        (new LanguageSubdirectoryResolver(['fr', 'nl', 'en'], 'en'))->resolve($request);
+
+        $this->assertSame('fr', $request->getLanguage());
+        $this->assertSame('/pomme/framboise', $request->getPath());
+        $this->assertSame('/fr/pomme/framboise', $request->getUrl());
+        $this->assertSame($url, $request->getUrl(true));
     }
 
     public function testLanguageSubdomainResolver()
