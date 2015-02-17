@@ -35,13 +35,17 @@ class LanguageSubdirectoryResolver implements ResolverInterface
      */
     public function resolve(HttpRequestInterface $httpRequest)
     {
-        $httpRequest->setDefaultLanguage($this->defaultLanguage);
+        if ($this->defaultLanguage) {
+            $httpRequest->setDefaultLanguage($this->defaultLanguage);
+        }
 
         $path = $httpRequest->getPath();
 
         $pathExploded = array_filter(explode('/', $path));
         if (!$pathExploded) {
-            $httpRequest->setLanguage($this->defaultLanguage);
+            if ($this->defaultLanguage) {
+                $httpRequest->setLanguage($this->defaultLanguage);
+            }
 
             return;
         }
@@ -51,7 +55,7 @@ class LanguageSubdirectoryResolver implements ResolverInterface
         if (in_array($language, $this->languages)) {
             $httpRequest->setLanguage($language);
             $httpRequest->setPath('/'.implode('/', $pathExploded));
-        } else {
+        } elseif($this->defaultLanguage) {
             $httpRequest->setLanguage($this->defaultLanguage);
         }
     }
