@@ -16,8 +16,8 @@ namespace Mendo\Http\Request;
  */
 abstract class AbstractHttpRequest implements HttpRequestInterface
 {
-    protected $absoluteUrlPattern = '{protocol}://{host}:{port}/{language}{baseUrl}{path}';
-    protected $relativeUrlPattern = '/{language}{baseUrl}{path}';
+    protected $absoluteUrlPattern = '{protocol}://{host}:{port}{baseUrl}/{language}{path}';
+    protected $relativeUrlPattern = '{baseUrl}/{language}{path}';
     protected $protocol;
     protected $host;
     protected $port;

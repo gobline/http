@@ -64,26 +64,6 @@ class HttpRequestTest extends PHPUnit_Framework_TestCase
         $this->assertSame('/pomme/framboise', $request->getPath());
         $this->assertSame('/fr/pomme/framboise', $request->getUrl());
         $this->assertSame($url, $request->getUrl(true));
-
-        $url = 'http://example.com/fr/pomme/framboise';
-
-        $request = new StringHttpRequest($url);
-        (new LanguageSubdirectoryResolver(['fr', 'nl', 'en']))->resolve($request);
-
-        $this->assertSame('fr', $request->getLanguage());
-        $this->assertSame('/pomme/framboise', $request->getPath());
-        $this->assertSame('/fr/pomme/framboise', $request->getUrl());
-        $this->assertSame($url, $request->getUrl(true));
-
-        $url = 'http://example.com/pomme/framboise';
-
-        $request = new StringHttpRequest($url);
-        (new LanguageSubdirectoryResolver(['fr', 'nl', 'en']))->resolve($request);
-
-        $this->assertNull($request->getLanguage());
-        $this->assertSame('/pomme/framboise', $request->getPath());
-        $this->assertSame('/pomme/framboise', $request->getUrl());
-        $this->assertSame($url, $request->getUrl(true));
     }
 
     public function testLanguageSubdomainResolver()
