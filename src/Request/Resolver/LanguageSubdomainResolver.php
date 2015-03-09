@@ -40,14 +40,18 @@ class LanguageSubdomainResolver implements ResolverInterface
 
         $hostExploded = explode('.', $httpRequest->getHost());
         if (!$hostExploded) {
-            $httpRequest->setLanguage($this->defaultLanguage);
+            if ($this->defaultLanguage) {
+                $httpRequest->setLanguage($this->defaultLanguage);
+            }
 
             return;
         }
 
         $intersect = current(array_intersect($hostExploded, $this->languages));
         if (!$intersect) {
-            $httpRequest->setLanguage($this->defaultLanguage);
+            if ($this->defaultLanguage) {
+                $httpRequest->setLanguage($this->defaultLanguage);
+            }
 
             return;
         }
