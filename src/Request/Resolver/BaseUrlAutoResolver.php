@@ -26,7 +26,11 @@ class BaseUrlAutoResolver implements ResolverInterface
         $scriptPath = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
         $baseUrl = $this->getIntersection($scriptPath, $_SERVER['REQUEST_URI']);
         $httpRequest->setBaseUrl(rtrim($baseUrl, '/'));
-        $httpRequest->setPath('/'.str_replace($baseUrl, '', $_SERVER['REQUEST_URI']));
+
+        $pos = strpos($_SERVER['REQUEST_URI'], $baseUrl);
+        if ($pos === 0) {
+            $httpRequest->setPath('/'.substr_replace($_SERVER['REQUEST_URI'], '', $pos, strlen($baseUrl)));
+        }
     }
 
     /**
