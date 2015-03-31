@@ -224,6 +224,28 @@ interface HttpRequestInterface
     public function getPost(...$args);
 
     /**
+     * @param string $name
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return bool
+     */
+    public function hasFile($name);
+
+    /**
+     * This method takes zero or one arguments.
+     * If no arguments have been passed, the whole files request data array is returned.
+     * The first argument specifies which file data you want to get.
+     *
+     * @param mixed $args
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return mixed
+     */
+    public function getFile($name = null);
+
+    /**
      * @param bool $absolute
      *
      * @return string

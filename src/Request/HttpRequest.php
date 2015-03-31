@@ -30,6 +30,7 @@ class HttpRequest extends AbstractHttpRequest
 
         $this->queryData = $_GET;
         $this->postData = $_POST;
+        $this->filesData = $this->mapPhpFiles();
     }
 
     /**
@@ -105,5 +106,23 @@ class HttpRequest extends AbstractHttpRequest
     public function getUserAgent()
     {
         return $_SERVER['HTTP_USER_AGENT'];
+    }
+
+    private function mapPhpFiles()
+    {
+        $files = [];
+        foreach ($_FILES as $fileName => $fileParams) {
+            $files[$fileName] = [];
+            foreach ($fileParams as $param => $data) {
+                if (!is_array($data)) {
+                    $files[$fileName][$param] = $data;
+                } else {
+                    foreach ($data as $i => $v) {
+                        $this->mapPhpFileParam($files[$fileName], $param, $i, $v);
+                    }
+                }
+            }
+        }
+        return $files;
     }
 }

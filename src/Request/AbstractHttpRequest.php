@@ -24,6 +24,7 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
     protected $path;
     protected $queryData = [];
     protected $postData = [];
+    protected $filesData = [];
     protected $baseUrl;
     protected $language;
     protected $defaultLanguage;
@@ -300,7 +301,7 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
             throw new \InvalidArgumentException('$name cannot be empty');
         }
 
-        return array_key_exists($name, $_POST);
+        return array_key_exists($name, $this->postData);
     }
 
     /**
@@ -326,6 +327,34 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
 
                 return $this->postData[$args[0]];
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasFile($name)
+    {
+        if ((string) $name === '') {
+            throw new \InvalidArgumentException('$name cannot be empty');
+        }
+
+        return array_key_exists($name, $this->filesData);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFile($name = null)
+    {
+        if ($name === null) {
+            return $this->filesData;
+        }
+
+        if (!$this->hasFile($name)) {
+            throw new \InvalidArgumentException('File data "'.$name.'" not found');
+        }
+
+        return $this->filesData[$name];
     }
 
     /**
