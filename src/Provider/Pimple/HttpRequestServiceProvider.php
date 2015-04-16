@@ -14,6 +14,7 @@ namespace Mendo\Http\Provider\Pimple;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Mendo\Http\Request\HttpRequest;
+use Mendo\Http\Request\Resolver\BaseUrlResolver;
 use Mendo\Http\Request\Resolver\BaseUrlAutoResolver;
 use Mendo\Http\Request\Resolver\LanguageSubdirectoryResolver;
 use Mendo\Http\Request\Resolver\LanguageSubdomainResolver;
@@ -35,11 +36,16 @@ class HttpRequestServiceProvider implements ServiceProviderInterface
         $container[$this->reference.'.language.strategy'] = null;
         $container[$this->reference.'.language.list'] = [];
         $container[$this->reference.'.language.default'] = null;
+        $container[$this->reference.'.baseUrl'] = null;
 
         $container[$this->reference] = function ($c) {
             $request = new HttpRequest();
 
-            (new BaseUrlAutoResolver())->resolve($request);
+            if ($c[$this->reference.'.baseUrl'] === null) {
+                (new BaseUrlAutoResolver())->resolve($request);
+            } else {
+                (new BaseUrlResolver($c[$this->reference.'.baseUrl']))->resolve($request);
+            }
 
             if (!empty($c[$this->reference.'.language.strategy'])) {
                 $languages = $c[$this->reference.'.language.list'];
