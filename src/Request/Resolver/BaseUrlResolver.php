@@ -42,22 +42,4 @@ class BaseUrlResolver implements ResolverInterface
             $httpRequest->setPath('/'.substr_replace($_SERVER['REQUEST_URI'], '', $pos, strlen($baseUrl)));
         }
     }
-
-    /**
-     * @param string $a
-     * @param string $b
-     */
-    private function getIntersection($a, $b)
-    {
-        $result = '';
-        $len = min(strlen($a), strlen($b));
-        for ($i = 0; $i < $len; ++$i) {
-            if ($a[$i] != $b[$i]) {
-                break;
-            }
-            $result .= $a[$i];
-        }
-
-        return $result;
-    }
 }
