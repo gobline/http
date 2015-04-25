@@ -54,7 +54,7 @@ class HttpRequest extends AbstractHttpRequest
      */
     public function isPost()
     {
-        return $_POST && array_key_exists('REQUEST_METHOD', $_SERVER) && $_SERVER['REQUEST_METHOD'] === 'POST';
+        return array_key_exists('REQUEST_METHOD', $_SERVER) && $_SERVER['REQUEST_METHOD'] === 'POST';
     }
 
     /**
