@@ -378,10 +378,8 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
 
         $url = str_replace(array_keys($placeholders), $placeholders, $format);
 
-        $prefix = '?';
-        foreach ($this->queryData as $key => $value) {
-            $url .= $prefix.$key.'='.rawurlencode($value);
-            $prefix = '&';
+        if ($this->queryData) {
+            $url .= '?'.http_build_query($this->queryData);
         }
 
         if (!$absolute && $url === '') {
