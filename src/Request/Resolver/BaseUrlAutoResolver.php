@@ -24,12 +24,12 @@ class BaseUrlAutoResolver implements ResolverInterface
     public function resolve(HttpRequestInterface $httpRequest)
     {
         $scriptPath = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
-        $baseUrl = $this->getIntersection($scriptPath, $_SERVER['REQUEST_URI']);
+        $baseUrl = $this->getIntersection($scriptPath, $httpRequest->getPath());
         $httpRequest->setBaseUrl(rtrim($baseUrl, '/'));
 
-        $pos = strpos($_SERVER['REQUEST_URI'], $baseUrl);
+        $pos = strpos($httpRequest->getPath(), $baseUrl);
         if ($pos === 0) {
-            $httpRequest->setPath('/'.substr_replace($_SERVER['REQUEST_URI'], '', $pos, strlen($baseUrl)));
+            $httpRequest->setPath('/'.substr_replace($httpRequest->getPath(), '', $pos, strlen($baseUrl)));
         }
     }
 

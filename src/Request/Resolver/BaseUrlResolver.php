@@ -37,9 +37,9 @@ class BaseUrlResolver implements ResolverInterface
         $httpRequest->setBaseUrl($baseUrl);
 
         $baseUrl.='/';
-        $pos = strpos($_SERVER['REQUEST_URI'], $baseUrl);
+        $pos = strpos($httpRequest->getPath(), $baseUrl);
         if ($pos === 0) {
-            $httpRequest->setPath('/'.substr_replace($_SERVER['REQUEST_URI'], '', $pos, strlen($baseUrl)));
+            $httpRequest->setPath('/'.substr_replace($httpRequest->getPath(), '', $pos, strlen($baseUrl)));
         }
     }
 }

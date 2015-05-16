@@ -26,7 +26,7 @@ class HttpRequest extends AbstractHttpRequest
 
         $this->port = (int) $_SERVER['SERVER_PORT'];
 
-        $this->path = strtok($_SERVER['REQUEST_URI'], '&');
+        $this->path = strtok($_SERVER['REQUEST_URI'], '?');
 
         $this->queryData = $_GET;
         $this->postData = $_POST;
