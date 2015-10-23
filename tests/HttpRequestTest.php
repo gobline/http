@@ -10,6 +10,7 @@
  */
 
 use Mendo\Http\Request\StringHttpRequest;
+use Mendo\Http\Request\Resolver\BaseUrlResolver;
 use Mendo\Http\Request\Resolver\LanguageSubdirectoryResolver;
 use Mendo\Http\Request\Resolver\LanguageSubdomainResolver;
 
@@ -31,6 +32,19 @@ class HttpRequestTest extends PHPUnit_Framework_TestCase
         $this->assertSame('/foo/bar', $request->getPath());
         $this->assertSame(8080, $request->getPort());
         $this->assertSame('http://example.com:8080/foo/bar?hello=world&qux=corge', $request->getUrl(true));
+    }
+    public function testBaseUrlResolver()
+    {
+        $url = 'http://example.com/base-url/foo/bar?hello=world&qux=corge';
+
+        $request = new StringHttpRequest($url);
+        (new BaseUrlResolver('/base-url'))->resolve($request);
+
+        $this->assertSame('world', $request->getQuery('hello'));
+        $this->assertSame('corge', $request->getQuery('qux'));
+        $this->assertSame('/foo/bar', $request->getPath());
+        $this->assertSame('/base-url', $request->getBaseUrl());
+        $this->assertSame('http://example.com/base-url/foo/bar?hello=world&qux=corge', $request->getUrl(true));
     }
 
     public function testLanguageSubdirectoryResolver()
